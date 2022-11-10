@@ -21,5 +21,11 @@
 
 
 ## 사용한 기술스택
-`python`
-`react`
+<p align="center">
+<img src="https://img.shields.io/badge/html-blue?style=flat-square&logo=html5&logoColor=white"/></a>&nbsp
+<img src="https://img.shields.io/badge/css-red?style=flat-square&logo=css3&logoColor=white"/></a>&nbsp
+<img src="https://img.shields.io/badge/Javascript-orange?style=flat-square&logo=JavaScript&logoColor=white"/></a>&nbsp
+<img src="https://img.shields.io/badge/React-blue?style=flat-square&logo=React&logoColor=white"/></a>&nbsp
+<img src="https://img.shields.io/badge/ReactNative-66C5DF?style=flat-square&logo=React&logoColor=white"/></a>&nbsp
+<img src="https://img.shields.io/badge/Python-0B99D6?style=flat-square&logo=Python&logoColor=white"/></a>&nbsp
+</p>
