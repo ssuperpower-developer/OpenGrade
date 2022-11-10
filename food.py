@@ -41,4 +41,4 @@ for i in 도담items:
 for i in container:
     print(i)
 # print(container)
-time.sleep(20)
+time.sleep(20)  # 추후 명시적 대기로 바꾸어야 함
