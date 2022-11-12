@@ -1,13 +1,11 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from bs4 import BeautifulSoup
-
-
 from selenium.webdriver.common.by import By
 import time
-
 import pandas as pd
 import re
+import datetime as dt
 
 ser = Service("C:/Users/rover0811/chromedriver.exe")  # 크롬 드라이버 잡아주는 것
 op = webdriver.ChromeOptions()  # initial
@@ -22,8 +20,8 @@ ID = s.find_element(By.ID, "userid")
 PWD = s.find_element(By.ID, "pwd")
 LoginButton = s.find_element(By.CLASS_NAME, 'btn_login')
 
-ID.send_keys("")  # 학번
-PWD.send_keys('')  # 비밀번호
+ID.send_keys("20213118")  # 학번
+PWD.send_keys('rlagustn1!')  # 비밀번호
 LoginButton.click()
 
 time.sleep(5)
@@ -52,7 +50,7 @@ s.switch_to.parent_frame()
 s.switch_to.frame("contentAreaFrame")
 s.switch_to.frame("isolatedWorkArea")
 s.find_element(By.CSS_SELECTOR, "#WD011C-btn").click()
-s.find_element(By.CSS_SELECTOR, "#WD0161").click()
+s.find_element(By.CSS_SELECTOR, "#WD0161").click()  # 여기까지가 접근부
 
 time.sleep(5)
 html = s.page_source
@@ -63,12 +61,6 @@ tableitems = soup.select(
 
 
 tableitems = tableitems[0].find_all('tr')
-
-# for index, item in enumerate(tableitems):
-#     if (index == 0):
-#         print(item.text)
-#     for i in item.next_siblings:
-#         print(i.text)
 
 data = {
     "index": [""],
@@ -94,12 +86,19 @@ for i in tableitems:
 #     print(t)
 
 df = pd.DataFrame(data, columns=data[0])
-
 df.to_excel("result.xlsx")
-# f = open("./data.txt", "w")
+v = open(
+    "seleniumpath.txt", "w+")
 # v = open("./variables.txt", "w")
 # f.write(str(tableitems))
-# v.write(str(ID))
+v.write("ID: {0}\n".format(ID))
+v.write("ID: {0}\n".format(PWD))
+v.write("ID: {0}\n".format(LoginButton))
+v.write("ID: {0}\n".format(학사관리Button))
+v.write("ID: {0}\n".format(성적졸업Button))
+
+v.close()
+
 # v.write(str(PWD))
 # v.write(str(LoginButton))
 # v.write(str(학사관리Button))

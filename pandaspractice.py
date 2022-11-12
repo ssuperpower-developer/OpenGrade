@@ -1,6 +1,3 @@
-import pandas as pd
+import datetime as dt
 
-df1 = pd.DataFrame([], columns=['이수학년도', '이수학기', '과목코드',
-                   '과목명', '과목학점', '성적', '등급', '교수명', '비고', '상세성적'])
-
-print(df1)
+print(dt.datetime.now().strftime("%m/%d %H:%M"))
