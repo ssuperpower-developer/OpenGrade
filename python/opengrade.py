@@ -10,8 +10,8 @@ import datetime as dt
 ser = Service("C:/Users/rover0811/chromedriver.exe")  # 크롬 드라이버 잡아주는 것
 op = webdriver.ChromeOptions()  # initial
 op.add_experimental_option("excludeSwitches", ["enable-logging"])  # option 주기
-# op.add_argument('--window-size=1920,1080')
-# op.add_argument("headless")  # option 주기
+op.add_argument('--window-size=1920,1080')
+op.add_argument("headless")  # option 주기
 s = webdriver.Chrome(service=ser, options=op)  # 초기화
 
 
@@ -21,8 +21,8 @@ ID = s.find_element(By.ID, "userid")
 PWD = s.find_element(By.ID, "pwd")
 LoginButton = s.find_element(By.CLASS_NAME, 'btn_login')
 
-ID.send_keys("20211834")  # 학번
-PWD.send_keys('June20021006!!')  # 비밀번호
+ID.send_keys("")  # 학번
+PWD.send_keys('')  # 비밀번호
 LoginButton.click()
 
 time.sleep(5)
