@@ -183,7 +183,7 @@ class Saint:
         except TimeoutException:
             print('Content Not loaded')
             return
-
+        
 
     def _get_grade_page(self, year:str, semester:str):
         """
@@ -239,6 +239,35 @@ class Saint:
 
         except Exception as e:
             print("main", e)
+            
+    def _get_grade_page_year(self):
+        def click_drop_down(drop_down_selector, element_selector, ignored_exceptions=None):
+                #클릭이 되지 않으면 최대 3번 진행
+                for _ in range(3):
+                    #드랍다운 버튼을 클릭한다.
+                    drop_down_button = self._click_ec_element(By.CSS_SELECTOR, drop_down_selector, ignored_exceptions=ignored_exceptions, timeout=1)
+                    #요소를 클릭한다.
+                    element_button = self._click_ec_element(By.CSS_SELECTOR, element_selector, ignored_exceptions=ignored_exceptions, timeout=1)
+                    #버튼이 둘다 존재하면 둘다 클릭했으므로 그만한다.
+                    if drop_down_button and element_button: break
+        try:
+            semester_drop_selector = 'input[role="combobox"][value$="학기"]'
+            first_semester_selector = f'div[class~="lsListbox__value"][data-itemkey="090"]'
+            self.wait_table_updated()
+            second_semester_page_source=self.driver.page_source #2학기 성적은 변동이 필요없으므로 바로 받아온다.
+            click_drop_down(semester_drop_selector, first_semester_selector)
+            self.wait_table_updated()
+            first_semester_page_source=self.driver.page_source
+
+            return(first_semester_page_source,second_semester_page_source)
+        except Exception as e:
+            print("main", e)
+
+
+
+
+    
+
 
 
 #userid 입력 필요
