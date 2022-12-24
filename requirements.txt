@@ -6,3 +6,5 @@ selenium
 uvicorn
 fastapi
 webdriver_manager
+sqlalchemy
+pymysql
