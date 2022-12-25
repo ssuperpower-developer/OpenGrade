@@ -80,28 +80,32 @@ def get_token(token:Key):
     subject_names = ['PHL', '융합전공을위한수학', '빅데이터프로그래밍언어',"IT기반의유통물류경영",'프로그래밍및실습']
 
     grade_infos = [grade for grade in grade_first if grade['과목명'] in subject_names] #배열안에 딕셔너리
-
     grade_simple=dict()
     for i in grade_infos:
         grade_simple[i["과목명"]]=i["성적"]
+    columns_names = ['phl','math','programming','business_management','big_data','com_score','soft_score']
+    grade_final={key:0 for key in columns_names}
+
+    grade_keys=grade_simple.keys()
+
+    for key in grade_keys:
+        if key=="PHL":
+            grade_final["phl"]=grade_simple["PHL"]
+        if key=="융합전공을위한수학":
+            grade_final["math"]=grade_simple["융합전공을위한수학"]
+        if key=="프로그래밍및실습":
+            grade_final["programming"]=grade_simple["프로그래밍및실습"]
+        if key=="IT기반의유통물류경영":
+            grade_final["business_management"]=grade_simple["IT기반의유통물류경영"]
+        if key=="빅데이터프로그래밍언어":
+            grade_final["big_data"]=grade_simple["빅데이터프로그래밍언어"]
     
-    #
-        
 
-    #예외처리 필요
-    grade_simple["phl"]=grade_simple.pop("PHL")
-    grade_simple["math"]=grade_simple.pop("융합전공을위한수학")
-    grade_simple["programming"]=grade_simple.pop("프로그래밍및실습")
-    grade_simple["business_management"]=grade_simple.pop("IT기반의유통물류경영")
-    grade_simple["big_data"]=grade_simple.pop("빅데이터프로그래밍언어")
-
-    # grade_simple["com_score"]=0.2*int(grade_simple["phl"])+0.2*int(grade_simple["math"])
-    # +0.3*int(grade_simple["big_data"])+0.3*int(grade_simple["business_management"])
-    # grade_simple["soft_score"]=0.2*int(grade_simple["phl"])+0.2*int(grade_simple["math"])
-    # +0.3*int(grade_simple["big_data"])+0.3*int(grade_simple["programming"])
-
-    # insert_sql()
+    grade_final["com_score"]=round(0.2*int(grade_final["phl"])+0.2*int(grade_final["math"])+0.3*int(grade_final["big_data"])+0.3*int(grade_final["business_management"]),ndigits=3)
+    grade_final["soft_score"]=round(0.2*int(grade_final["phl"])+0.2*int(grade_final["math"])+0.3*int(grade_final["big_data"])+0.3*int(grade_final["programming"]),ndigits=3)
+    grade_final["student_id"]=token.id_
+    insert_sql.insert_data_db(grade_final)
 
 
 
-    return grade_simple
+    return grade_final

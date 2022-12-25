@@ -43,7 +43,7 @@ class Saint:
             webdriver.Chrome: 브라우저 컨트롤 객체
         """
         options = webdriver.ChromeOptions()
-        # options.add_argument("headless") #CLI에서 실행
+        options.add_argument("headless") #CLI에서 실행
         options.add_argument('no-sandbox') #GPU관련 작업 하지 않음
         options.add_argument('disable-gpu') #GPU관련 작업 하지 않음
         options.add_argument('disable-dev-shm-usage') #공유 메모리 사용하지 않음, 속도 개선을 위해

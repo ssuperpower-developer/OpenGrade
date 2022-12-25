@@ -68,6 +68,7 @@ def insert_data_db(insert_data:dict):
     engine = create_engine(f"mysql+pymysql://root:0000@34.64.94.74:3306/grade", encoding='utf-8')
     # user = User(**insert_data)
     session = Session(engine) #세션을 생성
+    insert_data["update_date"]=datetime.datetime.now()
     session.query(User).filter(User.studentId==f"{insert_data['student_id']}").update(
         {User.bigData:insert_data["big_data"],
         User.businessManagement:insert_data["business_management"],
@@ -84,6 +85,7 @@ def insert_data_db(insert_data:dict):
 
     except TimeoutError as e: #DB 연결을 위한 시간이 너무 오래 걸리는 경우
         print("Exception in insert data to DB", e)
+        
 
     except IntegrityError as e: #기본 키 등의 제약이 지켜지지 않은 경우
         print("Integirity Violence Errror!", e)
